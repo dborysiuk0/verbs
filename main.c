@@ -13,11 +13,29 @@ int main(void){
         return 1;
     }
 
+    //change fgets 
+    //use debage
+    //use malloc, realloc, free
     //get row with words
+    
     int i = 0, row = 0; 
     char ch;
     char words[40];
-    int var_i =0;
+    int var_i = 0;
+    int number_row = 0;
+    while(1){
+        ch = fgetc(ptr);
+        if(ch == '\n'){
+            number_row++;
+        }
+        else if(ch == EOF){
+            number_row++;
+            break;
+        }
+    }
+    printf("Number of row:\t%d", number_row);
+
+
     while(!feof(ptr)){
         ch = fgetc(ptr);
         if(ch == '\n'){
