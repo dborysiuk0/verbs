@@ -5,51 +5,60 @@
 
 int main(void){
     FILE *ptr;
-    int number = 4;
+    int number = 1;
 
     ptr = fopen("verbs.txt", "r");
     if(ptr == NULL){
         printf("can`t open file");
+        return 1;
     }
 
     //get row with words
     int i = 0, row = 0; 
     char ch;
     char words[40];
+    int var_i =0;
     while(!feof(ptr)){
         ch = fgetc(ptr);
         if(ch == '\n'){
             row++; 
+            var_i = i;
             i = 0;
         }
         if(row == number){
-            words[i+1] = ' ';
-            words[i+2] = ' ';
+            words[var_i+1] = '\0';
             break;
         }
         words[i] = ch;
         i++;
     }
-    printf("%s\n", words);
+    printf("Sentens:\t%s\n", words);
 
     char words_separate[3][10];
-    int j = 0, ctr = 0;
-
-    for(int i = 0; i< (strlen(words)); ++i){
-        if(ctr == 3){
-            break;
-        }
+    int j = 0, word_index = 0;
+    /*
+    for(int i = 0; i <= strlen(words); ++i){
         //if space
-        if(words[i] == ' '){
-            words_separate[ctr][j] = '\0';
-            ctr++;
+        if(words[i] == ' ' || words[i] == '\0'){
+            words_separate[word_index][j] = '\0';
+            word_index++;
             j=0;
         }
         else{
-            words_separate[ctr][j] = words[i];
+            words_separate[word_index][j] = words[i];
             j++;
         }
+    } 
+    */
+    
+    char *str = words;
+    char * pch;
+    pch = strtok (str," ");
+    while (pch != NULL){
+        strcpy(words_separate[word_index++], pch);
+        pch = strtok (NULL, " ");
     }
+
     printf("\nPrint separate words: \n");
 
     for(int i =0; i < 3; i++){
