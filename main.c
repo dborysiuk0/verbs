@@ -5,7 +5,6 @@
 
 int main(void){
     FILE *ptr;
-    int number = 1;
 
     ptr = fopen("verbs.txt", "r");
     if(ptr == NULL){
@@ -17,23 +16,27 @@ int main(void){
     //use debage
     //use malloc, realloc, free
     //get row with words
-    
     int i = 0, row = 0; 
     char ch;
+    char ch_for_rows;
     char words[40];
     int var_i = 0;
     int number_row = 0;
+    
     while(1){
-        ch = fgetc(ptr);
-        if(ch == '\n'){
+        ch_for_rows = fgetc(ptr);
+        if(ch_for_rows == '\n'){
             number_row++;
         }
-        else if(ch == EOF){
+        else if(ch_for_rows == EOF){
             number_row++;
             break;
         }
     }
     printf("Number of row:\t%d", number_row);
+
+    int number = rand()%5;
+    printf("Random number: %d",number );
 
 
     while(!feof(ptr)){
