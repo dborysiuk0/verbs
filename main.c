@@ -35,12 +35,19 @@ int main(void){
     }
     printf("Number of row:\t%d", number_row);
 
-    int number = rand()%5;
+    int number = rand()%(number_row+1);
     printf("Random number: %d",number );
 
+    fclose(ptr);
+    ptr = fopen("verbs.txt", "r");
+    if(ptr == NULL){
+        printf("can`t open file");
+        return 1;
+    }
 
     while(!feof(ptr)){
         ch = fgetc(ptr);
+        printf("%c", ch);
         if(ch == '\n'){
             row++; 
             var_i = i;
